@@ -113,3 +113,35 @@ export async function getAudioForText(text: string) {
     return { success: false, error: message };
   }
 }
+
+export async function getSearchSuggestions(query: string): Promise<string[]> {
+  if (query.length < 2) {
+    return [];
+  }
+
+  const headers = {
+    'User-Agent': 'WikiSenseApp/1.0 (https://your-app-url.com; your-contact@example.com)'
+  };
+  
+  const searchParams = new URLSearchParams({
+    action: 'opensearch',
+    search: query,
+    limit: '5',
+    namespace: '0',
+    format: 'json',
+    origin: '*',
+  });
+
+  try {
+    const response = await fetch(`https://en.wikipedia.org/w/api.php?${searchParams}`, { headers });
+    if (!response.ok) {
+      return [];
+    }
+    const data = await response.json();
+    // The suggestions are in the second item of the response array
+    return data[1] || [];
+  } catch (error) {
+    console.error('Failed to fetch suggestions:', error);
+    return [];
+  }
+}
