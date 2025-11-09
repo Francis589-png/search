@@ -38,7 +38,7 @@ export default function SearchContainer() {
         {state.status === 'success' && <SearchResults state={state} />}
         {state.status === 'initial' && (
           <div className="text-center text-muted-foreground py-16">
-            <Sparkles className="mx-auto h-12 w-12 mb-4 text-primary" />
+            <Sparkles className="mx-auto h-12 w-12 text-primary" />
             <h2 className="text-xl font-semibold">Welcome to WikiSense</h2>
             <p className="mt-2">
               Enter a topic above to start searching Wikipedia with AI summaries.
