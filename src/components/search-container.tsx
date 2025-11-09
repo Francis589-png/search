@@ -81,7 +81,7 @@ export default function SearchContainer() {
         {state.status === 'initial' && !isPending && (
           <div className="text-center text-muted-foreground py-16 animate-fadeIn">
             <Sparkles className="mx-auto h-12 w-12 text-primary" />
-            <h2 className="text-xl font-semibold">Welcome to JTT Search</h2>
+            <h2 className="text-xl font-semibold">Welcome to Jusu Search</h2>
             <p className="mt-2">
               Enter a topic above to start searching Wikipedia with AI summaries.
             </p>

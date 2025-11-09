@@ -5,7 +5,7 @@ import AppLayout from '@/components/app-layout';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'JTT Search',
+  title: 'Jusu Tech Team Search',
   description: 'Search Wikipedia with AI-powered summaries and contextual understanding.',
 };
 
