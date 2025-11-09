@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useEffect, useActionState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import type { SearchState } from '@/lib/types';
 import { searchWikipedia } from '@/app/actions';
@@ -15,7 +14,7 @@ const initialState: SearchState = {
 };
 
 export default function SearchContainer() {
-  const [state, formAction] = useFormState(searchWikipedia, initialState);
+  const [state, formAction] = useActionState(searchWikipedia, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
