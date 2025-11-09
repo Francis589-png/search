@@ -23,6 +23,9 @@ export async function searchWikipedia(
   }
   
   const searchQuery = validatedQuery.data;
+  const headers = {
+    'User-Agent': 'WikiSenseApp/1.0 (https://your-app-url.com; your-contact@example.com)'
+  };
 
   try {
     // Step 1: Search for articles and get snippets
@@ -35,7 +38,7 @@ export async function searchWikipedia(
       format: 'json',
       origin: '*',
     });
-    const searchResponse = await fetch(`https://en.wikipedia.org/w/api.php?${searchParams}`);
+    const searchResponse = await fetch(`https://en.wikipedia.org/w/api.php?${searchParams}`, { headers });
     if (!searchResponse.ok) throw new Error('Failed to fetch search results from Wikipedia.');
     
     const searchData = await searchResponse.json();
@@ -60,7 +63,7 @@ export async function searchWikipedia(
       format: 'json',
       origin: '*',
     });
-    const imageResponse = await fetch(`https://en.wikipedia.org/w/api.php?${imageParams}`);
+    const imageResponse = await fetch(`https://en.wikipedia.org/w/api.php?${imageParams}`, { headers });
     if (!imageResponse.ok) throw new Error('Failed to fetch images from Wikipedia.');
 
     const imageData = await imageResponse.json();
