@@ -51,24 +51,20 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <SidebarMenuButton asChild isActive={pathname === '/'}>
-                    <a>
-                      <HomeIcon />
-                      <span>Home</span>
-                    </a>
-                  </SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton asChild isActive={pathname === '/'}>
+                  <Link href="/">
+                    <HomeIcon />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <Link href="/video-generator" legacyBehavior passHref>
-                  <SidebarMenuButton asChild isActive={pathname === '/video-generator'}>
-                    <a>
-                      <Clapperboard />
-                      <span>Video Generator</span>
-                    </a>
-                  </SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton asChild isActive={pathname === '/video-generator'}>
+                  <Link href="/video-generator">
+                    <Clapperboard />
+                    <span>Video Generator</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
