@@ -5,6 +5,7 @@ import type { SearchState, WikiSearchResult } from '@/lib/types';
 import { summarizeSearchResults } from '@/ai/flows/summarize-search-results';
 import { contextualizeSearchResults } from '@/ai/flows/contextualize-search-results';
 import { suggestRelatedTopics } from '@/ai/flows/suggest-related-topics';
+import { textToSpeech } from '@/ai/flows/text-to-speech';
 
 const searchSchema = z.string().min(3, 'Search query must be at least 3 characters long.');
 
@@ -99,5 +100,16 @@ export async function searchWikipedia(
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
     return { status: 'error', message };
+  }
+}
+
+export async function getAudioForText(text: string) {
+  try {
+    const { audio } = await textToSpeech(text);
+    return { success: true, audio };
+  } catch (error) {
+    console.error('Error generating audio:', error);
+    const message = error instanceof Error ? error.message : 'Failed to generate audio.';
+    return { success: false, error: message };
   }
 }
