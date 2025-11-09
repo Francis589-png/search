@@ -1,21 +1,21 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
 import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { RefObject } from 'react';
 
 interface SearchFormProps {
+  formRef: RefObject<HTMLFormElement>;
+  inputRef: RefObject<HTMLInputElement>;
   formAction: (payload: FormData) => void;
-  status: 'initial' | 'loading' | 'success' | 'error';
+  isPending: boolean;
 }
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
+function SubmitButton({ isPending }: { isPending: boolean }) {
   return (
-    <Button type="submit" disabled={pending} className="bg-accent hover:bg-accent/90 text-accent-foreground">
-      {pending ? (
+    <Button type="submit" disabled={isPending} className="bg-accent hover:bg-accent/90 text-accent-foreground">
+      {isPending ? (
         <>
           <span className="animate-spin mr-2">...</span> Searching...
         </>
@@ -28,18 +28,19 @@ function SubmitButton() {
   );
 }
 
-export default function SearchForm({ formAction, status }: SearchFormProps) {
+export default function SearchForm({ formRef, inputRef, formAction, isPending }: SearchFormProps) {
   return (
-    <form action={formAction} className="flex gap-2 items-center">
+    <form ref={formRef} action={formAction} className="flex gap-2 items-center">
       <Input
+        ref={inputRef}
         type="search"
         name="query"
         placeholder="Search for topics on Wikipedia..."
         className="flex-grow text-base"
         required
-        disabled={status === 'loading'}
+        disabled={isPending}
       />
-      <SubmitButton />
+      <SubmitButton isPending={isPending} />
     </form>
   );
 }

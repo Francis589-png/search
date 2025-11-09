@@ -16,4 +16,5 @@ export type SearchState = {
   results?: WikiSearchResult[];
   summary?: string;
   context?: string;
+  relatedTopics?: string[];
 };

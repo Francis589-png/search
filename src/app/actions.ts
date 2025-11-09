@@ -4,6 +4,7 @@ import { z } from 'zod';
 import type { SearchState, WikiSearchResult } from '@/lib/types';
 import { summarizeSearchResults } from '@/ai/flows/summarize-search-results';
 import { contextualizeSearchResults } from '@/ai/flows/contextualize-search-results';
+import { suggestRelatedTopics } from '@/ai/flows/suggest-related-topics';
 
 const searchSchema = z.string().min(3, 'Search query must be at least 3 characters long.');
 
@@ -43,7 +44,7 @@ export async function searchWikipedia(
     
     const searchData = await searchResponse.json();
     if (!searchData.query?.search || searchData.query.search.length === 0) {
-      return { status: 'success', query: searchQuery, results: [], summary: 'No results found for your query.', context: '' };
+      return { status: 'success', query: searchQuery, results: [], summary: 'No results found for your query.', context: '', relatedTopics: [] };
     }
 
     const pageIds = searchData.query.search.map((item: any) => item.pageid);
@@ -76,12 +77,13 @@ export async function searchWikipedia(
       thumbnail: page.thumbnail,
     }));
 
-    // Step 3: Use Genkit to summarize and contextualize
+    // Step 3: Use Genkit to summarize, contextualize, and suggest related topics
     const searchResultsText = results.map(r => `Title: ${r.title}\nSnippet: ${r.snippet.replace(/<[^>]*>/g, '')}`).join('\n\n');
 
-    const [summaryResult, contextResult] = await Promise.all([
+    const [summaryResult, contextResult, relatedTopicsResult] = await Promise.all([
       summarizeSearchResults({ query: searchQuery, searchResults: searchResultsText }),
       contextualizeSearchResults({ query: searchQuery, searchResults: searchResultsText }),
+      suggestRelatedTopics({ query: searchQuery, searchResults: searchResultsText }),
     ]);
 
     return {
@@ -90,6 +92,7 @@ export async function searchWikipedia(
       results,
       summary: summaryResult.summary,
       context: contextResult.contextualizedResults,
+      relatedTopics: relatedTopicsResult.topics,
     };
 
   } catch (error) {

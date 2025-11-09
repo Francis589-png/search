@@ -2,9 +2,15 @@ import Image from 'next/image';
 import type { SearchState } from '@/lib/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Lightbulb, BookOpen } from 'lucide-react';
+import { Lightbulb, BookOpen, Compass } from 'lucide-react';
+import { Button } from './ui/button';
 
-export default function SearchResults({ state }: { state: SearchState }) {
+interface SearchResultsProps {
+  state: SearchState;
+  onRelatedTopicClick: (topic: string) => void;
+}
+
+export default function SearchResults({ state, onRelatedTopicClick }: SearchResultsProps) {
   const noImagePlaceholder = PlaceHolderImages[0];
 
   if (!state.query || state.results === undefined) {
@@ -27,7 +33,7 @@ export default function SearchResults({ state }: { state: SearchState }) {
           Results for &quot;{state.query}&quot;
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           {state.summary && (
             <Card className="bg-card">
               <CardHeader>
@@ -51,6 +57,29 @@ export default function SearchResults({ state }: { state: SearchState }) {
               </CardHeader>
               <CardContent>
                 <p className="text-card-foreground/90 leading-relaxed">{state.context}</p>
+              </CardContent>
+            </Card>
+          )}
+          {state.relatedTopics && state.relatedTopics.length > 0 && (
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Compass className="w-6 h-6 text-primary" />
+                  <span>Related Topics</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {state.relatedTopics.map((topic) => (
+                  <Button
+                    key={topic}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onRelatedTopicClick(topic)}
+                    className="bg-accent/10 hover:bg-accent/20"
+                  >
+                    {topic}
+                  </Button>
+                ))}
               </CardContent>
             </Card>
           )}
