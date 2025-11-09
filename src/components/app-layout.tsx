@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, Image as ImageIcon, Home as HomeIcon } from 'lucide-react';
+import { Bot, Home as HomeIcon } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -15,7 +15,6 @@ import {
   SidebarTrigger,
   SidebarFooter
 } from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
 import SplashScreen from './splash-screen';
 
@@ -55,14 +54,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   <Link href="/">
                     <HomeIcon />
                     <span>Home</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === '/image-generator'}>
-                  <Link href="/image-generator">
-                    <ImageIcon />
-                    <span>Image Generator</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
