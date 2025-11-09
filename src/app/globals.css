@@ -82,3 +82,67 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .perspective-800 {
+    perspective: 800px;
+  }
+  .text-3d {
+    text-shadow:
+      0 1px 0 hsl(var(--primary-foreground)),
+      0 2px 0 hsl(var(--primary-foreground)),
+      0 3px 0 hsl(var(--primary-foreground)),
+      0 4px 0 hsl(var(--primary-foreground)),
+      0 5px 0 hsl(var(--primary-foreground)),
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 10px rgba(0,0,0,.2),
+      0 20px 20px rgba(0,0,0,.15);
+  }
+  .j-logo-container {
+    transform-style: preserve-3d;
+    animation: rotateLogo 10s infinite linear;
+  }
+  .j-logo {
+    font-size: 8rem;
+    font-weight: bold;
+    color: hsl(var(--primary));
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(20px);
+    text-shadow:
+      1px 1px 0px hsl(var(--primary-foreground)),
+      2px 2px 0px hsl(var(--primary-foreground)),
+      3px 3px 0px hsl(var(--primary-foreground)),
+      4px 4px 0px hsl(var(--primary-foreground)),
+      5px 5px 0px hsl(var(--primary-foreground)),
+      6px 6px 0px hsl(var(--primary-foreground)),
+      7px 7px 10px rgba(0,0,0,0.4);
+  }
+
+  @keyframes rotateLogo {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes zoomIn {
+      from { transform: scale(0.8) }
+      to { transform: scale(1) }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .zoom-in {
+    animation: zoomIn 0.8s ease-out;
+  }
+}
