@@ -6,7 +6,7 @@ export default function SplashScreen() {
           <div className="j-logo">J</div>
         </div>
         <h1 className="text-3d text-3xl font-bold text-foreground">
-          POWERED BY JUSU TECH
+          JTT SEARCH
         </h1>
       </div>
     </div>

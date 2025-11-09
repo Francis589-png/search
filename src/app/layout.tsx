@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import AppLayout from '@/components/app-layout';
 
 export const metadata: Metadata = {
-  title: 'WikiSense',
+  title: 'JTT Search',
   description: 'Search Wikipedia with AI-powered summaries and contextual understanding.',
 };
 
