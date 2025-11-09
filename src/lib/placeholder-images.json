@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "no-image-placeholder",
+      "description": "A placeholder for when no image is available",
+      "imageUrl": "https://images.unsplash.com/photo-1679592098614-ae83589aa91a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhYnN0cmFjdCUyMHBhdHRlcm58ZW58MHx8fHwxNzYyNTk4OTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract pattern"
+    }
+  ]
 }
