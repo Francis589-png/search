@@ -62,7 +62,7 @@ export default function SearchContainer() {
         <WifiOff className="mx-auto h-12 w-12 text-primary" />
         <h2 className="text-xl font-semibold mt-4">You are currently offline</h2>
         <p className="mt-2 mb-8">
-          While you&apos;re waiting for the connection to return, how about a game?
+          While you're waiting for the connection to return, how about a game?
         </p>
         <TicTacToe />
       </div>
@@ -79,7 +79,7 @@ export default function SearchContainer() {
         {isPending && <LoadingSkeleton />}
         {state.status === 'success' && <SearchResults state={state} onRelatedTopicClick={handleRelatedTopicSearch} />}
         {state.status === 'initial' && !isPending && (
-          <div className="text-center text-muted-foreground py-16">
+          <div className="text-center text-muted-foreground py-16 animate-fadeIn">
             <Sparkles className="mx-auto h-12 w-12 text-primary" />
             <h2 className="text-xl font-semibold">Welcome to JTT Search</h2>
             <p className="mt-2">
