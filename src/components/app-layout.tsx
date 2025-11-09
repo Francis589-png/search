@@ -44,7 +44,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-3 px-2">
               <Bot className="h-8 w-8 text-primary" />
               <h1 className="text-2xl font-bold text-foreground font-headline">
-                Jusu Search
+                JTT Search
               </h1>
             </div>
           </SidebarHeader>
