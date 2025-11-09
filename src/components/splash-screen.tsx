@@ -8,6 +8,9 @@ export default function SplashScreen() {
         <h1 className="text-3d text-3xl font-bold text-foreground">
           JTT SEARCH
         </h1>
+        <p className="mt-2 text-muted-foreground">
+          An AI-powered search experience.
+        </p>
       </div>
     </div>
   );
