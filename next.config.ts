@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
   },
   // This is needed to allow cross-origin requests from the development environment.
   allowedDevOrigins: ["*.cloudworkstations.dev"],
-  experimental: {},
+  experimental: {
+    // This is needed to allow cross-origin requests from the development environment.
+    serverActions: {
+      allowedOrigins: ['*.cloudworkstations.dev'],
+    },
+  },
   images: {
     remotePatterns: [
       {
