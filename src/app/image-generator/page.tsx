@@ -6,12 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Film, Loader, Wand2 } from 'lucide-react';
+import { Image as ImageIcon, Loader, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { generateVideoAction } from './actions';
-import type { VideoGenerationState } from './types';
+import { generateImageAction } from './actions';
+import type { ImageGenerationState } from './types';
+import Image from 'next/image';
 
-const initialState: VideoGenerationState = {
+const initialState: ImageGenerationState = {
   status: 'initial',
 };
 
@@ -28,15 +29,15 @@ function SubmitButton() {
       ) : (
         <>
           <Wand2 className="mr-2 h-4 w-4" />
-          Generate Video
+          Generate Image
         </>
       )}
     </Button>
   );
 }
 
-export default function VideoGeneratorPage() {
-  const [state, formAction] = useActionState(generateVideoAction, initialState);
+export default function ImageGeneratorPage() {
+  const [state, formAction] = useActionState(generateImageAction, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -55,8 +56,8 @@ export default function VideoGeneratorPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Film className="w-6 h-6 text-primary" />
-              <span>AI Video Generator</span>
+              <ImageIcon className="w-6 h-6 text-primary" />
+              <span>AI Image Generator</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -79,26 +80,29 @@ export default function VideoGeneratorPage() {
               <CardContent className="p-6 flex flex-col items-center justify-center text-center">
                 <Loader className="h-12 w-12 animate-spin text-primary mb-4" />
                 <p className="text-lg font-semibold">
-                  Generating your video...
+                  Generating your image...
                 </p>
                 <p className="text-muted-foreground">
-                  This can take up to a minute. Please be patient.
+                  This may take a moment. Please be patient.
                 </p>
               </CardContent>
             </Card>
           )}
 
-          {state.status === 'success' && state.video && (
+          {state.status === 'success' && state.image && (
             <Card>
               <CardHeader>
-                <CardTitle>Generated Video</CardTitle>
+                <CardTitle>Generated Image</CardTitle>
               </CardHeader>
               <CardContent>
-                <video
-                  src={state.video}
-                  controls
-                  className="w-full rounded-md"
-                />
+                <div className="relative aspect-video">
+                  <Image
+                    src={state.image}
+                    alt={state.prompt || 'Generated image'}
+                    fill
+                    className="w-full rounded-md object-contain"
+                  />
+                </div>
                  <p className="text-sm text-muted-foreground mt-2">Prompt: {state.prompt}</p>
               </CardContent>
             </Card>
@@ -109,7 +113,7 @@ export default function VideoGeneratorPage() {
                 <Wand2 className="h-4 w-4" />
                 <AlertTitle>Ready to create?</AlertTitle>
                 <AlertDescription>
-                Enter a description of the video you want to generate and click the button.
+                Enter a description of the image you want to generate and click the button.
                 </AlertDescription>
             </Alert>
           )}

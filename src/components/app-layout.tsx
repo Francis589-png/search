@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, Clapperboard, Home as HomeIcon } from 'lucide-react';
+import { Bot, Image as ImageIcon, Home as HomeIcon } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -59,10 +59,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === '/video-generator'}>
-                  <Link href="/video-generator">
-                    <Clapperboard />
-                    <span>Video Generator</span>
+                <SidebarMenuButton asChild isActive={pathname === '/image-generator'}>
+                  <Link href="/image-generator">
+                    <ImageIcon />
+                    <span>Image Generator</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

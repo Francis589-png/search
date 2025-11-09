@@ -1,6 +1,6 @@
-export type VideoGenerationState = {
+export type ImageGenerationState = {
     status: 'initial' | 'loading' | 'success' | 'error';
     message?: string;
     prompt?: string;
-    video?: string;
+    image?: string;
 };
